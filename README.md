@@ -87,6 +87,17 @@ Each archived page is checked against its recorded SHA-256 before parsing. If th
 
 Incrementally update the corpus from the wikiHow sitemap.
 
+
+| Option      | Meaning                                               |
+| ----------- | ----------------------------------------------------- |
+| `--tokens`  | exact comma-separated words matched against URL slugs |
+| `--all`     | select the full sitemap                               |
+| `--limit`   | maximum pages fetched this run                        |
+| `--dry-run` | preview without changing data                         |
+| `--state`   | sitemap snapshot path                                 |
+
+For example:
+
 * Preview first:
 
   ```bash
@@ -112,37 +123,6 @@ Incrementally update the corpus from the wikiHow sitemap.
   ```
 
   There are roughly 62,000 pages. One should never do anything at scale merely because an option permits it.
-
-| Option      | Meaning                                               |
-| ----------- | ----------------------------------------------------- |
-| `--tokens`  | exact comma-separated words matched against URL slugs |
-| `--all`     | select the full sitemap                               |
-| `--limit`   | maximum pages fetched this run                        |
-| `--dry-run` | preview without changing data                         |
-| `--state`   | sitemap snapshot path                                 |
-
-For example:
-
-```text
-https://www.wikihow.com/Bake-Brie
-```
-
-contains the tokens:
-
-```text
-bake
-brie
-```
-
-So:
-
-```bash
-python src/main.py update --tokens bake
-```
-
-matches it.
-
-Token matching is exact. `boil` matches `Boil-Water`, but not `Boiling-Water`.
 
 ## Output
 
@@ -175,4 +155,12 @@ Each parsed step preserves wikiHow's procedural structure:
 ```
 
 `sid` means step ID. For example, `m1s1` means Method 1, Step 1.
+
+## License
+
+This project is licensed under the MIT License.
+
+This repository contains scraper code only. Content retrieved from wikiHow is
+not distributed with this repository and remains subject to wikiHow's
+applicable terms and content license.
 
